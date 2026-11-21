@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1795282784679,
+      "tag": "0000_agendamais_schema",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1795282953207,
+      "tag": "0001_professional_categories",
+      "breakpoints": true
+    }
+  ]
+}

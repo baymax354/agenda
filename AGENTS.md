@@ -28,3 +28,18 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Two areas: customer app at `/` (mobile-first, phone frame on desktop via `AppShell`) and company panel under `/empresa/*` (`AdminShell`, gated in `src/routes/empresa.tsx`). Why: mirrors the client/company split of the reference design.
+- Booking writes go only through the `create_booking` / `cancel_my_booking` database functions; customers have no direct insert/update on `appointments`. Why: server-side checks for hours, slot alignment, blocked time and overlaps.
+- Double booking is prevented by the `appointment_no_overlap` exclusion constraint (statuses `agendado`, `em_andamento`); keep any new reserving status in that list.
+- Slot math lives in `src/lib/booking-time.ts` (business time zone from `business_settings.timezone`); submit the slot's ISO timestamp, never a local clock string. Tests: `src/lib/booking-time.test.ts`.
+- Company admin = `admin` row in `user_roles`; the first signed-in user who presses "Ativar painel da empresa" claims it via `claim_business_owner()`. Why: no hardcoded owner email.
+- Public photo uploads are blocked on this project; services/professionals pick from `PHOTO_GALLERY` (CDN assets) or a pasted https link.
+
+## Owner time off (live calendar)
+
+- The control is **Painel → Agenda → "Bloquear horário"** (writes `time_off`; `professional_id` null = whole team). Blocks hide new slots only; existing appointments stay. "Liberar" removes a block.
+- "Close tonight": use Bloquear horário for those hours with "Toda a equipe".
+- "We're closed every Monday": set it in **Painel → Configurações → Dias fechados** (`business_settings.closed_weekdays`). Opening hours and slot interval are there too.

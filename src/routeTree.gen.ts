@@ -10,33 +10,224 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgendamentosRouteImport } from './routes/agendamentos'
+import { Route as ConfirmarRouteImport } from './routes/confirmar'
+import { Route as EmpresaRouteImport } from './routes/empresa'
+import { Route as EntrarRouteImport } from './routes/entrar'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as RedefinirSenhaRouteImport } from './routes/redefinir-senha'
+import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as AgendamentoIdRouteImport } from './routes/agendamento.$id'
+import { Route as AgendarServiceIdRouteImport } from './routes/agendar.$serviceId'
+import { Route as EmpresaIndexRouteImport } from './routes/empresa.index'
+import { Route as EmpresaClientesRouteImport } from './routes/empresa.clientes'
+import { Route as EmpresaConfiguracoesRouteImport } from './routes/empresa.configuracoes'
+import { Route as EmpresaProfissionaisRouteImport } from './routes/empresa.profissionais'
+import { Route as EmpresaRelatoriosRouteImport } from './routes/empresa.relatorios'
+import { Route as EmpresaServicosRouteImport } from './routes/empresa.servicos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgendamentosRoute = AgendamentosRouteImport.update({
+  id: '/agendamentos',
+  path: '/agendamentos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfirmarRoute = ConfirmarRouteImport.update({
+  id: '/confirmar',
+  path: '/confirmar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmpresaRoute = EmpresaRouteImport.update({
+  id: '/empresa',
+  path: '/empresa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EntrarRoute = EntrarRouteImport.update({
+  id: '/entrar',
+  path: '/entrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RedefinirSenhaRoute = RedefinirSenhaRouteImport.update({
+  id: '/redefinir-senha',
+  path: '/redefinir-senha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosRoute = ServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgendamentoIdRoute = AgendamentoIdRouteImport.update({
+  id: '/agendamento/$id',
+  path: '/agendamento/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgendarServiceIdRoute = AgendarServiceIdRouteImport.update({
+  id: '/agendar/$serviceId',
+  path: '/agendar/$serviceId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmpresaIndexRoute = EmpresaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EmpresaRoute,
+} as any)
+const EmpresaClientesRoute = EmpresaClientesRouteImport.update({
+  id: '/clientes',
+  path: '/clientes',
+  getParentRoute: () => EmpresaRoute,
+} as any)
+const EmpresaConfiguracoesRoute = EmpresaConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => EmpresaRoute,
+} as any)
+const EmpresaProfissionaisRoute = EmpresaProfissionaisRouteImport.update({
+  id: '/profissionais',
+  path: '/profissionais',
+  getParentRoute: () => EmpresaRoute,
+} as any)
+const EmpresaRelatoriosRoute = EmpresaRelatoriosRouteImport.update({
+  id: '/relatorios',
+  path: '/relatorios',
+  getParentRoute: () => EmpresaRoute,
+} as any)
+const EmpresaServicosRoute = EmpresaServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
+  getParentRoute: () => EmpresaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agendamentos': typeof AgendamentosRoute
+  '/confirmar': typeof ConfirmarRoute
+  '/empresa': typeof EmpresaRouteWithChildren
+  '/entrar': typeof EntrarRoute
+  '/perfil': typeof PerfilRoute
+  '/redefinir-senha': typeof RedefinirSenhaRoute
+  '/servicos': typeof ServicosRoute
+  '/agendamento/$id': typeof AgendamentoIdRoute
+  '/agendar/$serviceId': typeof AgendarServiceIdRoute
+  '/empresa/clientes': typeof EmpresaClientesRoute
+  '/empresa/configuracoes': typeof EmpresaConfiguracoesRoute
+  '/empresa/profissionais': typeof EmpresaProfissionaisRoute
+  '/empresa/relatorios': typeof EmpresaRelatoriosRoute
+  '/empresa/servicos': typeof EmpresaServicosRoute
+  '/empresa/': typeof EmpresaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agendamentos': typeof AgendamentosRoute
+  '/confirmar': typeof ConfirmarRoute
+  '/entrar': typeof EntrarRoute
+  '/perfil': typeof PerfilRoute
+  '/redefinir-senha': typeof RedefinirSenhaRoute
+  '/servicos': typeof ServicosRoute
+  '/agendamento/$id': typeof AgendamentoIdRoute
+  '/agendar/$serviceId': typeof AgendarServiceIdRoute
+  '/empresa/clientes': typeof EmpresaClientesRoute
+  '/empresa/configuracoes': typeof EmpresaConfiguracoesRoute
+  '/empresa/profissionais': typeof EmpresaProfissionaisRoute
+  '/empresa/relatorios': typeof EmpresaRelatoriosRoute
+  '/empresa/servicos': typeof EmpresaServicosRoute
+  '/empresa': typeof EmpresaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agendamentos': typeof AgendamentosRoute
+  '/confirmar': typeof ConfirmarRoute
+  '/empresa': typeof EmpresaRouteWithChildren
+  '/entrar': typeof EntrarRoute
+  '/perfil': typeof PerfilRoute
+  '/redefinir-senha': typeof RedefinirSenhaRoute
+  '/servicos': typeof ServicosRoute
+  '/agendamento/$id': typeof AgendamentoIdRoute
+  '/agendar/$serviceId': typeof AgendarServiceIdRoute
+  '/empresa/clientes': typeof EmpresaClientesRoute
+  '/empresa/configuracoes': typeof EmpresaConfiguracoesRoute
+  '/empresa/profissionais': typeof EmpresaProfissionaisRoute
+  '/empresa/relatorios': typeof EmpresaRelatoriosRoute
+  '/empresa/servicos': typeof EmpresaServicosRoute
+  '/empresa/': typeof EmpresaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/agendamentos'
+    | '/confirmar'
+    | '/empresa'
+    | '/entrar'
+    | '/perfil'
+    | '/redefinir-senha'
+    | '/servicos'
+    | '/agendamento/$id'
+    | '/agendar/$serviceId'
+    | '/empresa/clientes'
+    | '/empresa/configuracoes'
+    | '/empresa/profissionais'
+    | '/empresa/relatorios'
+    | '/empresa/servicos'
+    | '/empresa/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/agendamentos'
+    | '/confirmar'
+    | '/entrar'
+    | '/perfil'
+    | '/redefinir-senha'
+    | '/servicos'
+    | '/agendamento/$id'
+    | '/agendar/$serviceId'
+    | '/empresa/clientes'
+    | '/empresa/configuracoes'
+    | '/empresa/profissionais'
+    | '/empresa/relatorios'
+    | '/empresa/servicos'
+    | '/empresa'
+  id:
+    | '__root__'
+    | '/'
+    | '/agendamentos'
+    | '/confirmar'
+    | '/empresa'
+    | '/entrar'
+    | '/perfil'
+    | '/redefinir-senha'
+    | '/servicos'
+    | '/agendamento/$id'
+    | '/agendar/$serviceId'
+    | '/empresa/clientes'
+    | '/empresa/configuracoes'
+    | '/empresa/profissionais'
+    | '/empresa/relatorios'
+    | '/empresa/servicos'
+    | '/empresa/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgendamentosRoute: typeof AgendamentosRoute
+  ConfirmarRoute: typeof ConfirmarRoute
+  EmpresaRoute: typeof EmpresaRouteWithChildren
+  EntrarRoute: typeof EntrarRoute
+  PerfilRoute: typeof PerfilRoute
+  RedefinirSenhaRoute: typeof RedefinirSenhaRoute
+  ServicosRoute: typeof ServicosRoute
+  AgendamentoIdRoute: typeof AgendamentoIdRoute
+  AgendarServiceIdRoute: typeof AgendarServiceIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +239,146 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/agendamentos': {
+      id: '/agendamentos'
+      path: '/agendamentos'
+      fullPath: '/agendamentos'
+      preLoaderRoute: typeof AgendamentosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confirmar': {
+      id: '/confirmar'
+      path: '/confirmar'
+      fullPath: '/confirmar'
+      preLoaderRoute: typeof ConfirmarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/empresa': {
+      id: '/empresa'
+      path: '/empresa'
+      fullPath: '/empresa'
+      preLoaderRoute: typeof EmpresaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/entrar': {
+      id: '/entrar'
+      path: '/entrar'
+      fullPath: '/entrar'
+      preLoaderRoute: typeof EntrarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/redefinir-senha': {
+      id: '/redefinir-senha'
+      path: '/redefinir-senha'
+      fullPath: '/redefinir-senha'
+      preLoaderRoute: typeof RedefinirSenhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos': {
+      id: '/servicos'
+      path: '/servicos'
+      fullPath: '/servicos'
+      preLoaderRoute: typeof ServicosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agendamento/$id': {
+      id: '/agendamento/$id'
+      path: '/agendamento/$id'
+      fullPath: '/agendamento/$id'
+      preLoaderRoute: typeof AgendamentoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agendar/$serviceId': {
+      id: '/agendar/$serviceId'
+      path: '/agendar/$serviceId'
+      fullPath: '/agendar/$serviceId'
+      preLoaderRoute: typeof AgendarServiceIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/empresa/': {
+      id: '/empresa/'
+      path: '/'
+      fullPath: '/empresa/'
+      preLoaderRoute: typeof EmpresaIndexRouteImport
+      parentRoute: typeof EmpresaRoute
+    }
+    '/empresa/clientes': {
+      id: '/empresa/clientes'
+      path: '/clientes'
+      fullPath: '/empresa/clientes'
+      preLoaderRoute: typeof EmpresaClientesRouteImport
+      parentRoute: typeof EmpresaRoute
+    }
+    '/empresa/configuracoes': {
+      id: '/empresa/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/empresa/configuracoes'
+      preLoaderRoute: typeof EmpresaConfiguracoesRouteImport
+      parentRoute: typeof EmpresaRoute
+    }
+    '/empresa/profissionais': {
+      id: '/empresa/profissionais'
+      path: '/profissionais'
+      fullPath: '/empresa/profissionais'
+      preLoaderRoute: typeof EmpresaProfissionaisRouteImport
+      parentRoute: typeof EmpresaRoute
+    }
+    '/empresa/relatorios': {
+      id: '/empresa/relatorios'
+      path: '/relatorios'
+      fullPath: '/empresa/relatorios'
+      preLoaderRoute: typeof EmpresaRelatoriosRouteImport
+      parentRoute: typeof EmpresaRoute
+    }
+    '/empresa/servicos': {
+      id: '/empresa/servicos'
+      path: '/servicos'
+      fullPath: '/empresa/servicos'
+      preLoaderRoute: typeof EmpresaServicosRouteImport
+      parentRoute: typeof EmpresaRoute
+    }
   }
 }
 
+interface EmpresaRouteChildren {
+  EmpresaClientesRoute: typeof EmpresaClientesRoute
+  EmpresaConfiguracoesRoute: typeof EmpresaConfiguracoesRoute
+  EmpresaProfissionaisRoute: typeof EmpresaProfissionaisRoute
+  EmpresaRelatoriosRoute: typeof EmpresaRelatoriosRoute
+  EmpresaServicosRoute: typeof EmpresaServicosRoute
+  EmpresaIndexRoute: typeof EmpresaIndexRoute
+}
+
+const EmpresaRouteChildren: EmpresaRouteChildren = {
+  EmpresaClientesRoute: EmpresaClientesRoute,
+  EmpresaConfiguracoesRoute: EmpresaConfiguracoesRoute,
+  EmpresaProfissionaisRoute: EmpresaProfissionaisRoute,
+  EmpresaRelatoriosRoute: EmpresaRelatoriosRoute,
+  EmpresaServicosRoute: EmpresaServicosRoute,
+  EmpresaIndexRoute: EmpresaIndexRoute,
+}
+
+const EmpresaRouteWithChildren =
+  EmpresaRoute._addFileChildren(EmpresaRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgendamentosRoute: AgendamentosRoute,
+  ConfirmarRoute: ConfirmarRoute,
+  EmpresaRoute: EmpresaRouteWithChildren,
+  EntrarRoute: EntrarRoute,
+  PerfilRoute: PerfilRoute,
+  RedefinirSenhaRoute: RedefinirSenhaRoute,
+  ServicosRoute: ServicosRoute,
+  AgendamentoIdRoute: AgendamentoIdRoute,
+  AgendarServiceIdRoute: AgendarServiceIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
