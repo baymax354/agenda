@@ -7,4 +7,4 @@
 - [x] Conta do cliente com e-mail e senha (obrigatória para confirmar)
 - [x] Painel da empresa: Agenda, Serviços, Profissionais, Clientes, Relatórios, Configurações
 - [x] Testes de regras de horário
-- [ ] Verificação ponta a ponta
+- [x] Verificação ponta a ponta

@@ -36,7 +36,7 @@ export function AdminShell({ children, userName }: { children: ReactNode; userNa
         </Link>
         <nav className="mt-6 flex flex-1 flex-col gap-1">
           {NAV.map(({ to, label, icon: Icon, ...rest }) => (
-            <Link key={to} to={to} activeOptions={{ exact: "exact" in rest }} className={itemClass}>
+            <Link key={to} to={to} activeOptions={{ exact: "exact" in rest, includeSearch: false }} className={itemClass}>
               <Icon className="size-4" />
               {label}
             </Link>
@@ -70,7 +70,7 @@ export function AdminShell({ children, userName }: { children: ReactNode; userNa
         </div>
         <nav className="no-scrollbar flex gap-1 overflow-x-auto px-3 pb-3">
           {NAV.map(({ to, label, icon: Icon, ...rest }) => (
-            <Link key={to} to={to} activeOptions={{ exact: "exact" in rest }} className={itemClass + " shrink-0 py-2"}>
+            <Link key={to} to={to} activeOptions={{ exact: "exact" in rest, includeSearch: false }} className={itemClass + " shrink-0 py-2"}>
               <Icon className="size-4" />
               {label}
             </Link>
