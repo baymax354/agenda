@@ -8,3 +8,5 @@
 - [x] Painel da empresa: Agenda, Serviços, Profissionais, Clientes, Relatórios, Configurações
 - [x] Testes de regras de horário
 - [x] Verificação ponta a ponta
+- [x] Pacote de arquivos para abrir no VS Code (ZIP em Files)
+- [ ] Salvar o código no GitHub (conexão feita pelo usuário nas Configurações do projeto)
