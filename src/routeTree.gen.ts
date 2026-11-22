@@ -19,6 +19,7 @@ import { Route as RedefinirSenhaRouteImport } from './routes/redefinir-senha'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as AgendamentoIdRouteImport } from './routes/agendamento.$id'
 import { Route as AgendarServiceIdRouteImport } from './routes/agendar.$serviceId'
+import { Route as AuthRetornoRouteImport } from './routes/auth.retorno'
 import { Route as EmpresaIndexRouteImport } from './routes/empresa.index'
 import { Route as EmpresaClientesRouteImport } from './routes/empresa.clientes'
 import { Route as EmpresaConfiguracoesRouteImport } from './routes/empresa.configuracoes'
@@ -76,6 +77,11 @@ const AgendarServiceIdRoute = AgendarServiceIdRouteImport.update({
   path: '/agendar/$serviceId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRetornoRoute = AuthRetornoRouteImport.update({
+  id: '/auth/retorno',
+  path: '/auth/retorno',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EmpresaIndexRoute = EmpresaIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/servicos': typeof ServicosRoute
   '/agendamento/$id': typeof AgendamentoIdRoute
   '/agendar/$serviceId': typeof AgendarServiceIdRoute
+  '/auth/retorno': typeof AuthRetornoRoute
   '/empresa/clientes': typeof EmpresaClientesRoute
   '/empresa/configuracoes': typeof EmpresaConfiguracoesRoute
   '/empresa/profissionais': typeof EmpresaProfissionaisRoute
@@ -135,6 +142,7 @@ export interface FileRoutesByTo {
   '/servicos': typeof ServicosRoute
   '/agendamento/$id': typeof AgendamentoIdRoute
   '/agendar/$serviceId': typeof AgendarServiceIdRoute
+  '/auth/retorno': typeof AuthRetornoRoute
   '/empresa/clientes': typeof EmpresaClientesRoute
   '/empresa/configuracoes': typeof EmpresaConfiguracoesRoute
   '/empresa/profissionais': typeof EmpresaProfissionaisRoute
@@ -154,6 +162,7 @@ export interface FileRoutesById {
   '/servicos': typeof ServicosRoute
   '/agendamento/$id': typeof AgendamentoIdRoute
   '/agendar/$serviceId': typeof AgendarServiceIdRoute
+  '/auth/retorno': typeof AuthRetornoRoute
   '/empresa/clientes': typeof EmpresaClientesRoute
   '/empresa/configuracoes': typeof EmpresaConfiguracoesRoute
   '/empresa/profissionais': typeof EmpresaProfissionaisRoute
@@ -174,6 +183,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/agendamento/$id'
     | '/agendar/$serviceId'
+    | '/auth/retorno'
     | '/empresa/clientes'
     | '/empresa/configuracoes'
     | '/empresa/profissionais'
@@ -191,6 +201,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/agendamento/$id'
     | '/agendar/$serviceId'
+    | '/auth/retorno'
     | '/empresa/clientes'
     | '/empresa/configuracoes'
     | '/empresa/profissionais'
@@ -209,6 +220,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/agendamento/$id'
     | '/agendar/$serviceId'
+    | '/auth/retorno'
     | '/empresa/clientes'
     | '/empresa/configuracoes'
     | '/empresa/profissionais'
@@ -228,6 +240,7 @@ export interface RootRouteChildren {
   ServicosRoute: typeof ServicosRoute
   AgendamentoIdRoute: typeof AgendamentoIdRoute
   AgendarServiceIdRoute: typeof AgendarServiceIdRoute
+  AuthRetornoRoute: typeof AuthRetornoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -300,6 +313,13 @@ declare module '@tanstack/react-router' {
       path: '/agendar/$serviceId'
       fullPath: '/agendar/$serviceId'
       preLoaderRoute: typeof AgendarServiceIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/retorno': {
+      id: '/auth/retorno'
+      path: '/auth/retorno'
+      fullPath: '/auth/retorno'
+      preLoaderRoute: typeof AuthRetornoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/empresa/': {
@@ -379,6 +399,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosRoute: ServicosRoute,
   AgendamentoIdRoute: AgendamentoIdRoute,
   AgendarServiceIdRoute: AgendarServiceIdRoute,
+  AuthRetornoRoute: AuthRetornoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -11,3 +11,4 @@
 - [x] Pacote de arquivos para abrir no VS Code (ZIP em Files)
 - [ ] Salvar o código no GitHub (conexão feita pelo usuário nas Configurações do projeto)
   - Projeto renomeado para "agenda" para que o repositório criado seja "agenda"
+- [x] Links de confirmação/nova senha levando os clientes ao site da Vercel (agenda-five-beige.vercel.app)

@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 function NotFoundComponent() {
   return (
@@ -125,6 +126,12 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  // A login handed over from an email link arrives in the address (#access_token=...).
+  // Start the login client right away so it saves the session, whatever page this is.
+  useEffect(() => {
+    if (window.location.hash.includes("access_token=")) void supabase.auth.getSession();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { errorMessage } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { authRedirectOrigin } from "@/lib/site-url";
+import { authRedirectUrl } from "@/lib/site-url";
 
 type Search = { redirect?: string; modo?: "cadastro" };
 
@@ -82,7 +82,7 @@ function AuthPage() {
           email: parsed.data.email,
           password: parsed.data.password,
           options: {
-            emailRedirectTo: authRedirectOrigin() + target,
+            emailRedirectTo: authRedirectUrl(target),
             data: { full_name: parsed.data.full_name, phone: parsed.data.phone },
           },
         });
@@ -98,7 +98,7 @@ function AuthPage() {
         else setSentTo(parsed.data.email);
       } else {
         const { error } = await supabase.auth.resetPasswordForEmail(form.email.trim(), {
-          redirectTo: authRedirectOrigin() + "/redefinir-senha",
+          redirectTo: authRedirectUrl("/redefinir-senha"),
         });
         if (error) throw error;
         toast.success("Enviamos um link para redefinir sua senha.");
@@ -118,7 +118,7 @@ function AuthPage() {
       const { error } = await supabase.auth.resend({
         type: "signup",
         email: sentTo,
-        options: { emailRedirectTo: authRedirectOrigin() + target },
+        options: { emailRedirectTo: authRedirectUrl(target) },
       });
       if (error) throw error;
       toast.success("Enviamos o link de novo. Confira também a caixa de spam.");
