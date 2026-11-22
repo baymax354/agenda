@@ -47,7 +47,7 @@ function SettingsPage() {
   async function save(e: FormEvent) {
     e.preventDefault();
     if (f.close_time <= f.open_time) { toast.error("O fechamento precisa ser depois da abertura"); return; }
-    if (f.closed.length === 7) { toast.error("Deixe pelo menos um dia aberto"); return; }
+    if (f.closed.length === 7) { toast.error("Marque pelo menos um dia de atendimento"); return; }
     setBusy(true);
     const { error } = await supabase
       .from("business_settings")
@@ -100,13 +100,15 @@ function SettingsPage() {
               ))}
             </select>
           </Field>
-          <Field label="Dias fechados" className="sm:col-span-3">
+          <Field label="Dias que a unidade abre (marque os dias de atendimento)" className="sm:col-span-3">
             <div className="flex flex-wrap gap-4 pt-1">
               {WEEKDAYS.map((w, i) => (
                 <label key={w} className="flex items-center gap-2 text-sm">
                   <Checkbox
-                    checked={f.closed.includes(i)}
-                    onCheckedChange={(v) => setF({ ...f, closed: v ? [...f.closed, i].sort() : f.closed.filter((x) => x !== i) })}
+                    checked={!f.closed.includes(i)}
+                    onCheckedChange={(open) =>
+                      setF({ ...f, closed: open ? f.closed.filter((x) => x !== i) : [...f.closed, i].sort() })
+                    }
                   />
                   {w}
                 </label>

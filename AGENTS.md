@@ -42,5 +42,5 @@ use the editor.
 
 - The control is **Painel → Agenda → "Bloquear horário"** (writes `time_off`; `professional_id` null = whole team). Blocks hide new slots only; existing appointments stay. "Liberar" removes a block.
 - "Close tonight": use Bloquear horário for those hours with "Toda a equipe".
-- "We're closed every Monday": set it in **Painel → Configurações → Dias fechados** (`business_settings.closed_weekdays`). Opening hours and slot interval are there too.
+- "We're closed every Monday": set it in **Painel → Configurações → Dias que a unidade abre** (checked = open; stored inverted as `business_settings.closed_weekdays`). Opening hours and slot interval are there too.
 - Auth email links always point at the Lovable-published site (`PUBLIC_SITE_URL`); `/auth/retorno` then hands the session to the site the customer signed up on, only if its origin is in `EXTRA_APP_ORIGINS` (`src/lib/site-url.ts`, tests in `site-url.test.ts`). Why: the backend only accepts redirects to Lovable domains, and an open forward would leak sessions.
