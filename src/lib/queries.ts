@@ -1,4 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
+import { photoSrc } from "@/lib/site-url";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -60,4 +61,4 @@ export const PHOTO_GALLERY = [
   "/__l5e/assets-v1/ca492b75-8a48-48cb-b51b-b9647220c55a/carlos_lima.webp",
   "/__l5e/assets-v1/1e2f0791-e3ba-4e18-bd35-f84bacfc5cba/juliana_costa.webp",
   "/__l5e/assets-v1/94d56e58-21f2-4b4f-9bc2-63ec3b608f0d/rafael_souza.webp",
-];
+].map((url) => photoSrc(url));

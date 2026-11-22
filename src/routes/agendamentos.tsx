@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { photoSrc } from "@/lib/site-url";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { CalendarDays, UserRound } from "lucide-react";
@@ -108,7 +109,7 @@ function MyAppointments() {
               <li key={a.id} className="rounded-2xl border bg-card p-3 shadow-card">
                 <div className="flex gap-3">
                   {a.services?.image_url && (
-                    <img src={a.services.image_url} alt="" className="size-16 rounded-xl object-cover" />
+                    <img src={photoSrc(a.services.image_url)} alt="" className="size-16 rounded-xl object-cover" />
                   )}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-2">

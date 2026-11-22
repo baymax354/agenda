@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { photoSrc } from "@/lib/site-url";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Clock, MoreHorizontal, Plus, Search } from "lucide-react";
@@ -127,7 +128,7 @@ function AdminServices() {
         {list.map((s) => (
           <li key={s.id} className={cn("flex items-center gap-4 p-3", !s.active && "opacity-50")}>
             {s.image_url ? (
-              <img src={s.image_url} alt="" className="size-14 rounded-xl object-cover" />
+              <img src={photoSrc(s.image_url)} alt="" className="size-14 rounded-xl object-cover" />
             ) : (
               <div className="size-14 rounded-xl bg-muted" />
             )}

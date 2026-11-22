@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { photoSrc } from "@/lib/site-url";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronRight, Clock, Search, X } from "lucide-react";
@@ -92,7 +93,7 @@ function ServicesPage() {
                 className="flex overflow-hidden rounded-2xl border bg-card shadow-card transition-transform active:scale-[0.99]"
               >
                 {s.image_url ? (
-                  <img src={s.image_url} alt={s.name} className="h-28 w-28 shrink-0 object-cover" loading="lazy" />
+                  <img src={photoSrc(s.image_url)} alt={s.name} className="h-28 w-28 shrink-0 object-cover" loading="lazy" />
                 ) : (
                   <div className="h-28 w-28 shrink-0 bg-muted" />
                 )}

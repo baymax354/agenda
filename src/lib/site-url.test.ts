@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { PUBLIC_SITE_URL, authRedirectUrl, safeForwardTarget } from "./site-url";
+import { PUBLIC_SITE_URL, authRedirectUrl, photoSrc, safeForwardTarget } from "./site-url";
 
 const vercel = { hostname: "agenda-five-beige.vercel.app", origin: "https://agenda-five-beige.vercel.app" };
 
@@ -21,5 +21,16 @@ describe("email link addresses", () => {
     expect(safeForwardTarget("https://evil.vercel.app/")).toBeNull();
     expect(safeForwardTarget("https://agenda-five-beige.vercel.app.evil.com/")).toBeNull();
     expect(safeForwardTarget("javascript:alert(1)")).toBeNull();
+  });
+});
+
+describe("photoSrc", () => {
+  it("points built-in photos at the published site so they load on Vercel too", () => {
+    expect(photoSrc("/__l5e/assets-v1/abc/barba.webp")).toBe(
+      "https://agenda-amiga-booking-hub.lovable.app/__l5e/assets-v1/abc/barba.webp",
+    );
+  });
+  it("keeps pasted https links unchanged", () => {
+    expect(photoSrc("https://exemplo.com/foto.jpg")).toBe("https://exemplo.com/foto.jpg");
   });
 });

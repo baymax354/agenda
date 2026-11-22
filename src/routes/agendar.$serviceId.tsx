@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { photoSrc } from "@/lib/site-url";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Clock } from "lucide-react";
@@ -113,7 +114,7 @@ function PickPage() {
 
       {service && (
         <div className="mx-4 mt-3 flex items-center gap-3 rounded-2xl bg-muted p-2.5">
-          {service.image_url && <img src={service.image_url} alt="" className="size-12 rounded-xl object-cover" />}
+          {service.image_url && <img src={photoSrc(service.image_url)} alt="" className="size-12 rounded-xl object-cover" />}
           <div className="min-w-0 flex-1">
             <p className="truncate text-sm font-bold">{service.name}</p>
             <p className="inline-flex items-center gap-1 text-xs text-muted-foreground">
@@ -147,7 +148,7 @@ function PickPage() {
                 )}
               >
                 {p.photo_url ? (
-                  <img src={p.photo_url} alt={p.name} className="size-16 rounded-full border-2 border-background object-cover" />
+                  <img src={photoSrc(p.photo_url)} alt={p.name} className="size-16 rounded-full border-2 border-background object-cover" />
                 ) : (
                   <span className="flex size-16 items-center justify-center rounded-full border-2 border-background bg-muted font-bold">
                     {p.name[0]}

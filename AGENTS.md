@@ -36,7 +36,7 @@ use the editor.
 - Double booking is prevented by the `appointment_no_overlap` exclusion constraint (statuses `agendado`, `em_andamento`); keep any new reserving status in that list.
 - Slot math lives in `src/lib/booking-time.ts` (business time zone from `business_settings.timezone`); submit the slot's ISO timestamp, never a local clock string. Tests: `src/lib/booking-time.test.ts`.
 - Company admin = `admin` row in `user_roles`; the first signed-in user who presses "Ativar painel da empresa" claims it via `claim_business_owner()`. Why: no hardcoded owner email.
-- Public photo uploads are blocked on this project; services/professionals pick from `PHOTO_GALLERY` (CDN assets) or a pasted https link.
+- Public photo uploads are blocked on this project; services/professionals pick from `PHOTO_GALLERY` (CDN assets) or a pasted https link. Render every photo through `photoSrc()` and store full links: `/__l5e/` paths only resolve on the Lovable-published site, not on Vercel.
 
 ## Owner time off (live calendar)
 

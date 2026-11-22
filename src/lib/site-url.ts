@@ -34,3 +34,14 @@ export function safeForwardTarget(para: string | null | undefined): URL | null {
     return null;
   }
 }
+
+/**
+ * Built-in photos live on the Lovable-published site under /__l5e/. Other hosts (e.g. Vercel)
+ * don't serve that path, so turn those relative links into full links to the published site.
+ */
+export function photoSrc(url: string): string;
+export function photoSrc(url: string | null | undefined): string | undefined;
+export function photoSrc(url: string | null | undefined): string | undefined {
+  if (!url) return undefined;
+  return url.startsWith("/__l5e/") ? `${PUBLIC_SITE_URL}${url}` : url;
+}

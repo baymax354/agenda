@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { photoSrc } from "@/lib/site-url";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { MoreHorizontal, Plus } from "lucide-react";
@@ -123,7 +124,7 @@ function AdminPros() {
               </DropdownMenu>
             </div>
             {p.photo_url ? (
-              <img src={p.photo_url} alt={p.name} className="mx-auto size-24 rounded-full object-cover" />
+              <img src={photoSrc(p.photo_url)} alt={p.name} className="mx-auto size-24 rounded-full object-cover" />
             ) : (
               <div className="mx-auto flex size-24 items-center justify-center rounded-full bg-muted text-2xl font-bold">{p.name[0]}</div>
             )}

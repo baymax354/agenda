@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { photoSrc } from "@/lib/site-url";
 import { useQuery } from "@tanstack/react-query";
 import { Bell, ChevronRight, Clock, MapPin } from "lucide-react";
 import heroAsset from "@/assets/hero_woman.webp.asset.json";
@@ -43,7 +44,7 @@ function Home() {
 
         <section className="relative mt-5 overflow-hidden rounded-3xl bg-primary-soft">
           <img
-            src={heroAsset.url}
+            src={photoSrc(heroAsset.url)}
             alt="Mulher sorrindo com cabelo ondulado e brilhante"
             className="absolute inset-y-0 right-0 h-full w-[68%] object-cover object-top"
           />
@@ -81,7 +82,7 @@ function Home() {
               className="w-36 shrink-0 overflow-hidden rounded-2xl border bg-card shadow-card"
             >
               {s.image_url ? (
-                <img src={s.image_url} alt={s.name} className="h-24 w-full object-cover" loading="lazy" />
+                <img src={photoSrc(s.image_url)} alt={s.name} className="h-24 w-full object-cover" loading="lazy" />
               ) : (
                 <div className="h-24 bg-muted" />
               )}

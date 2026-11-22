@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { photoSrc } from "@/lib/site-url";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { CalendarDays, Clock, Lock, MapPin, UserRound } from "lucide-react";
@@ -84,7 +85,7 @@ function ConfirmPage() {
           <h2 className="font-bold">Resumo do agendamento</h2>
           {service && (
             <div className="mt-3 flex gap-3">
-              {service.image_url && <img src={service.image_url} alt="" className="size-16 rounded-xl object-cover" />}
+              {service.image_url && <img src={photoSrc(service.image_url)} alt="" className="size-16 rounded-xl object-cover" />}
               <div className="flex flex-1 flex-col justify-between">
                 <p className="font-bold">{service.name}</p>
                 <div className="flex items-center justify-between">
