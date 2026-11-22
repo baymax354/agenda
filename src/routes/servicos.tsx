@@ -63,14 +63,14 @@ function ServicesPage() {
             className="mb-3 h-11 w-full rounded-xl border bg-muted px-4 text-sm outline-none focus:border-primary"
           />
         )}
-        <div className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
+        <div className="flex flex-wrap gap-2 pb-1">
           {["Todos", ...CATEGORIES].map((c) => (
             <button
               key={c}
               type="button"
               onClick={() => setCat(c)}
               className={cn(
-                "shrink-0 rounded-xl px-5 py-2.5 text-sm font-semibold transition-colors",
+                "rounded-xl px-4 py-2 text-sm font-semibold transition-colors",
                 cat === c ? "bg-primary text-primary-foreground" : "bg-muted text-foreground hover:bg-border",
               )}
             >
