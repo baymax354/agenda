@@ -62,7 +62,17 @@ function AuthPage() {
     try {
       if (mode === "entrar") {
         const { error } = await supabase.auth.signInWithPassword({ email: form.email.trim(), password: form.password });
-        if (error) throw new Error(error.message === "Invalid login credentials" ? "E-mail ou senha incorretos" : error.message);
+        if (error) {
+          if (error.message === "Email not confirmed") {
+            setSentTo(form.email.trim());
+            throw new Error("Confirme seu e-mail antes de entrar. Podemos reenviar o link.");
+          }
+          throw new Error(
+            error.message === "Invalid login credentials"
+              ? "E-mail ou senha incorretos. Se esqueceu a senha, toque em \"Esqueci minha senha\"."
+              : error.message,
+          );
+        }
         navigate({ href: target });
       } else if (mode === "cadastro") {
         const parsed = signupSchema.safeParse(form);
@@ -76,6 +86,13 @@ function AuthPage() {
           },
         });
         if (error) throw error;
+        // An email that already has an account gets a fake success with no identities and no email sent.
+        if (data.user && (data.user.identities?.length ?? 0) === 0) {
+          setMode("entrar");
+          setForm((f) => ({ ...f, password: "" }));
+          toast.info("Este e-mail já tem conta. Entre com sua senha ou use \"Esqueci minha senha\".");
+          return;
+        }
         if (data.session) navigate({ href: target });
         else setSentTo(parsed.data.email);
       } else {
@@ -86,6 +103,24 @@ function AuthPage() {
         toast.success("Enviamos um link para redefinir sua senha.");
         setMode("entrar");
       }
+    } catch (err) {
+      toast.error(errorMessage(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function resend() {
+    if (!sentTo) return;
+    setBusy(true);
+    try {
+      const { error } = await supabase.auth.resend({
+        type: "signup",
+        email: sentTo,
+        options: { emailRedirectTo: window.location.origin + target },
+      });
+      if (error) throw error;
+      toast.success("Enviamos o link de novo. Confira também a caixa de spam.");
     } catch (err) {
       toast.error(errorMessage(err));
     } finally {
@@ -105,6 +140,20 @@ function AuthPage() {
             Enviamos um link para <span className="font-semibold text-foreground">{sentTo}</span>. Abra o link para ativar sua conta e
             continuar o agendamento.
           </p>
+          <p className="mt-3 text-xs text-muted-foreground">Não chegou? Confira a caixa de spam ou promoções.</p>
+          <Button type="button" variant="outline" className="mt-6 w-full" disabled={busy} onClick={resend}>
+            {busy ? "Aguarde..." : "Reenviar e-mail"}
+          </Button>
+          <button
+            type="button"
+            onClick={() => {
+              setSentTo(null);
+              setMode("entrar");
+            }}
+            className="mt-4 text-sm text-muted-foreground hover:text-foreground"
+          >
+            Voltar para entrar
+          </button>
         </div>
       </AppShell>
     );

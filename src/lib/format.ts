@@ -58,7 +58,18 @@ export function initials(name: string): string {
     .join("");
 }
 
+const AUTH_MESSAGES: [RegExp, string][] = [
+  [/password is known to be weak/i, "Essa senha é muito comum e fácil de adivinhar. Escolha outra."],
+  [/password should be at least/i, "A senha precisa ter pelo menos 6 caracteres."],
+  [/email rate limit exceeded|over_email_send_rate_limit/i, "Muitos e-mails enviados agora. Aguarde alguns minutos e tente de novo."],
+  [/for security purposes, you can only request this after/i, "Aguarde alguns segundos antes de pedir outro e-mail."],
+  [/unable to validate email address|invalid format/i, "E-mail inválido."],
+];
+
 export function errorMessage(e: unknown): string {
-  if (e && typeof e === "object" && "message" in e) return String((e as { message: string }).message);
+  if (e && typeof e === "object" && "message" in e) {
+    const msg = String((e as { message: string }).message);
+    return AUTH_MESSAGES.find(([re]) => re.test(msg))?.[1] ?? msg;
+  }
   return "Algo deu errado. Tente novamente.";
 }
