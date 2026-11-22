@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { photoSrc } from "@/lib/site-url";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -25,6 +25,8 @@ export const Route = createFileRoute("/servicos")({
 function ServicesPage() {
   const { data: services, isLoading } = useQuery(servicesQuery);
   const [cat, setCat] = useState<string>("Todos");
+  const chipsRef = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ x: number; left: number; moved: boolean } | null>(null);
   const [searching, setSearching] = useState(false);
   const [q, setQ] = useState("");
 
@@ -63,14 +65,35 @@ function ServicesPage() {
             className="mb-3 h-11 w-full rounded-xl border bg-muted px-4 text-sm outline-none focus:border-primary"
           />
         )}
-        <div className="flex flex-wrap gap-2 pb-1">
+        <div
+          ref={chipsRef}
+          onPointerDown={(e) => {
+            const el = chipsRef.current;
+            if (!el || e.pointerType !== "mouse") return;
+            drag.current = { x: e.clientX, left: el.scrollLeft, moved: false };
+          }}
+          onPointerMove={(e) => {
+            const el = chipsRef.current;
+            const d = drag.current;
+            if (!el || !d) return;
+            const dx = e.clientX - d.x;
+            if (Math.abs(dx) > 4) d.moved = true;
+            el.scrollLeft = d.left - dx;
+          }}
+          onPointerUp={() => setTimeout(() => (drag.current = null), 0)}
+          onPointerLeave={() => (drag.current = null)}
+          onClickCapture={(e) => {
+            if (drag.current?.moved) e.stopPropagation();
+          }}
+          className="no-scrollbar flex w-full min-w-0 cursor-grab touch-pan-x select-none gap-2 overflow-x-auto pb-1 active:cursor-grabbing"
+        >
           {["Todos", ...CATEGORIES].map((c) => (
             <button
               key={c}
               type="button"
               onClick={() => setCat(c)}
               className={cn(
-                "rounded-xl px-4 py-2 text-sm font-semibold transition-colors",
+                "shrink-0 rounded-xl px-4 py-2 text-sm font-semibold transition-colors",
                 cat === c ? "bg-primary text-primary-foreground" : "bg-muted text-foreground hover:bg-border",
               )}
             >
