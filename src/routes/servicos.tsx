@@ -85,7 +85,7 @@ function ServicesPage() {
           onClickCapture={(e) => {
             if (drag.current?.moved) e.stopPropagation();
           }}
-          className="no-scrollbar flex w-full min-w-0 cursor-grab touch-pan-x select-none gap-2 overflow-x-auto pb-1 active:cursor-grabbing"
+          className="no-scrollbar flex w-full min-w-0 cursor-grab touch-pan-x select-none gap-1.5 overflow-x-auto pb-1 active:cursor-grabbing"
         >
           {["Todos", ...CATEGORIES].map((c) => (
             <button
@@ -93,7 +93,7 @@ function ServicesPage() {
               type="button"
               onClick={() => setCat(c)}
               className={cn(
-                "shrink-0 rounded-xl px-4 py-2 text-sm font-semibold transition-colors",
+                "flex-1 shrink-0 whitespace-nowrap rounded-xl px-3 py-2 text-[13px] font-semibold transition-colors",
                 cat === c ? "bg-primary text-primary-foreground" : "bg-muted text-foreground hover:bg-border",
               )}
             >
