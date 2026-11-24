@@ -1,3 +1,4 @@
+import { DRAG_STRIP, useDragScroll } from "@/hooks/use-drag-scroll";
 import { useEffect, useMemo, useState } from "react";
 import { photoSrc } from "@/lib/site-url";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
@@ -27,6 +28,8 @@ export const Route = createFileRoute("/agendar/$serviceId")({
 });
 
 function PickPage() {
+  const prosStrip = useDragScroll();
+  const daysStrip = useDragScroll();
   const { serviceId } = Route.useParams();
   const navigate = useNavigate();
   const { data: services } = useQuery(servicesQuery);
@@ -127,7 +130,7 @@ function PickPage() {
 
       <section className="mt-5">
         <h2 className="px-5 text-base font-bold">Escolha o profissional</h2>
-        <div className="no-scrollbar mt-3 flex gap-3 overflow-x-auto px-5 pb-2">
+        <div {...prosStrip} className={`${DRAG_STRIP} mt-3 flex gap-3 px-5 pb-2`}>
           {eligible.length === 0 && pros && (
             <p className="text-sm text-muted-foreground">Nenhum profissional disponível para este serviço.</p>
           )}
@@ -165,7 +168,7 @@ function PickPage() {
 
       <section className="mt-5 px-5 pb-6">
         <h2 className="text-base font-bold">Escolha o horário</h2>
-        <div className="no-scrollbar -mx-5 mt-3 flex gap-2 overflow-x-auto px-5 pb-1">
+        <div {...daysStrip} className={`${DRAG_STRIP} -mx-5 mt-3 flex gap-2 px-5 pb-1`}>
           {days.map((d, i) => (
             <button
               key={d}

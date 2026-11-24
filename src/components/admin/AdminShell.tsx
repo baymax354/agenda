@@ -1,3 +1,4 @@
+import { DRAG_STRIP, useDragScroll } from "@/hooks/use-drag-scroll";
 import type { ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
@@ -19,6 +20,7 @@ const itemClass =
   "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-sidebar-foreground/80 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground data-[status=active]:bg-sidebar-primary data-[status=active]:font-semibold data-[status=active]:text-sidebar-primary-foreground";
 
 export function AdminShell({ children, userName }: { children: ReactNode; userName: string }) {
+  const navStrip = useDragScroll<HTMLElement>();
   const navigate = useNavigate();
   const qc = useQueryClient();
   async function logout() {
@@ -68,9 +70,9 @@ export function AdminShell({ children, userName }: { children: ReactNode; userNa
             <LogOut className="size-4" />
           </button>
         </div>
-        <nav className="no-scrollbar flex gap-1 overflow-x-auto px-3 pb-3">
+        <nav {...navStrip} className={`${DRAG_STRIP} flex gap-1 px-3 pb-3`}>
           {NAV.map(({ to, label, icon: Icon, ...rest }) => (
-            <Link key={to} to={to} activeOptions={{ exact: "exact" in rest, includeSearch: false }} className={itemClass + " shrink-0 py-2"}>
+            <Link key={to} to={to} activeOptions={{ exact: "exact" in rest, includeSearch: false }} draggable={false} className={itemClass + " shrink-0 py-2"}>
               <Icon className="size-4" />
               {label}
             </Link>

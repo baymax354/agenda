@@ -1,3 +1,4 @@
+import { DRAG_STRIP, useDragScroll } from "@/hooks/use-drag-scroll";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { photoSrc } from "@/lib/site-url";
 import { useQuery } from "@tanstack/react-query";
@@ -24,6 +25,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const featured = useDragScroll();
   const { data: settings } = useQuery(settingsQuery);
   const { data: services } = useQuery(servicesQuery);
 
@@ -73,12 +75,13 @@ function Home() {
             Ver todos
           </Link>
         </div>
-        <div className="no-scrollbar -mx-5 mt-3 flex gap-3 overflow-x-auto px-5 pb-1">
+        <div {...featured} className={`${DRAG_STRIP} -mx-5 mt-3 flex gap-3 px-5 pb-1`}>
           {(services ?? []).slice(0, 5).map((s) => (
             <Link
               key={s.id}
               to="/agendar/$serviceId"
               params={{ serviceId: s.id }}
+              draggable={false}
               className="w-36 shrink-0 overflow-hidden rounded-2xl border bg-card shadow-card"
             >
               {s.image_url ? (

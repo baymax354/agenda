@@ -44,3 +44,4 @@ use the editor.
 - "Close tonight": use Bloquear horário for those hours with "Toda a equipe".
 - "We're closed every Monday": set it in **Painel → Configurações → Dias que a unidade abre** (checked = open; stored inverted as `business_settings.closed_weekdays`). Opening hours and slot interval are there too.
 - Auth email links always point at the Lovable-published site (`PUBLIC_SITE_URL`); `/auth/retorno` then hands the session to the site the customer signed up on, only if its origin is in `EXTRA_APP_ORIGINS` (`src/lib/site-url.ts`, tests in `site-url.test.ts`). Why: the backend only accepts redirects to Lovable domains, and an open forward would leak sessions.
+- Horizontal scroll strips (chips, cards, days, mobile admin nav) use `useDragScroll` + `DRAG_STRIP` from `src/hooks/use-drag-scroll.ts`. Why: on desktop the phone frame has no touch, so mouse users must be able to drag them.
